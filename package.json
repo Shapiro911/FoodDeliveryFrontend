@@ -19,9 +19,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "env-cmd -f prod.env react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:prod": "env-cmd -f prod.env react-scripts start"
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "@reduxjs/toolkit": "^1.9.1",
+    "env-cmd": "^10.1.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.5.0",
     "redux": "^4.2.0",
