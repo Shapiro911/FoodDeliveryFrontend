@@ -10,7 +10,7 @@ export const Router = () => {
         <BrowserRouter>
             <div className="app">
                 <Routes>
-                    {!address ?
+                    {!address || address === undefined ?
                         <Route path="/" element={<Home />} /> :
                         <Route path="/" element={<RestaurantList />} />}
                 </Routes>

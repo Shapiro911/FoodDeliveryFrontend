@@ -45,20 +45,3 @@ export const restaurantsReducer = (state: restaurantsState = initialState, actio
             return state;
     }
 }
-
-// case ActionTypeRequestStatus.REQUEST_RESTAURANTS_LOADING:
-//     return {
-//         ...state,
-//         request: { status: RequestStatus.LOADING }
-//     }
-// case ActionTypeRequestStatus.REQUEST_RESTAURANTS_SUCCESS:
-//     return {
-//         ...state,
-//         restaurants: [...state.restaurants, ...action.payload],
-//         request: { status: RequestStatus.SUCCESS }
-//     }
-// case ActionTypeRequestStatus.REQUEST_RESTAURANTS_FAILURE:
-//     return {
-//         ...state,
-//         request: { status: RequestStatus.FAILURE, error: action.payload }
-//     }
