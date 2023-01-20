@@ -1,0 +1,77 @@
+@import "../../utils/mixins"
+@import "../../utils/variables"
+
+.input
+    border: none
+    outline: none
+    height: 100%
+    font-family: 'Uber Move Text', sans-serif
+    font-size: 16px
+    font-weight: bold
+    flex-grow: 1
+    background-color: rgb(246, 246, 246)
+    &::placeholder
+        color: grey
+
+.btn
+    @include btn
+    border-radius: 8px
+    margin-left: 8px
+    font-size: 18px
+    &:hover
+        @include hoverInvert
+
+.autocomplete
+    display: flex
+    flex-direction: row
+
+.searchBarContainer
+    height: 56px
+    box-shadow: $mainColor 0px -1px 0px inset
+    transition: box-shadow 0.3s ease-in-out 0s
+    background-color: rgb(246, 246, 246)
+    box-sizing: border-box
+    display: flex
+    align-items: center
+    padding: 8px 16px
+    &:focus-within
+        box-shadow: $secondaryColor 0px -2px 0px inset
+
+.searchResultBox
+    padding: 16px
+    transition: background 100ms ease 0s
+    background-color: $mainColor
+    outline: none
+    display: flex
+    color: $secondaryColor
+    cursor: pointer
+    &:hover
+        background-color: rgb(246, 246, 246)
+
+.suggestion
+    display: flex
+    flex-direction: column
+
+.mapMarker
+    font-size: 20px
+    margin-right: 16px
+    align-self: center
+
+.searchBar
+    display: flex
+    flex-direction: column
+    width: 500px
+    position: relative
+
+.suggestionContainer
+    position: absolute
+    top: 56px
+    width: 100%
+
+h4
+    font-size: 16px
+    font-weight: normal
+
+.suggestionText
+    color: rgb(84, 84, 84)
+    font-size: 14px

@@ -1,2 +1,48 @@
+@import "../../utils/mixins"
+
+.main
+    margin-top: 48px
+    display: flex
+    padding: 0px 40px
+
 .list
-    margin-top: 24px
+    padding: 0px 12px
+    display: grid
+    gap: 20px 24px
+    grid-template-columns: repeat(3, 1fr)
+    flex-grow: 1
+
+.restaurants
+    display: flex
+    flex-direction: column
+    flex-grow: 1
+    min-width: 800px
+    width: 100%
+
+.showMore
+    @include btn
+    margin: 40px auto
+    font-size: 18px
+
+.loadingItem
+    max-width: 456px
+    min-width: 200px
+    position: relative
+    div
+        height: 128px
+    h3
+        margin-top: 12px
+        margin-bottom: 12px
+        height: 14px
+        width: 60%
+    p
+        margin-bottom: 12px
+        height: 14px
+        width: 40%
+    .rating
+        position: absolute
+        right: 12px
+        top: 136px
+        border-radius: 50%
+        height: 28px
+        width: 28px

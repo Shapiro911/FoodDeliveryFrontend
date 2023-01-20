@@ -1,0 +1,70 @@
+@import "../../utils/variables"
+@import "../../utils/mixins"
+
+.headerLeft
+    display: flex
+    align-items: center
+
+header
+    background-color: $transparent
+    width: 100%
+    padding: 20px 40px
+    display: flex
+    flex-direction: row
+    align-items: center
+    min-width: 1024px
+    justify-content: space-between
+    box-sizing: border-box
+
+.headerHome
+    position: fixed
+    z-index: 1
+    transition: background-color 200ms ease 0s, border-bottom 200ms ease 0s
+
+.scrolled
+    background-color: $mainColor
+    border-bottom: rgb(226, 226, 226) 2px solid
+
+.bars
+    color: $secondaryColor
+    font-size: 20px
+    cursor: pointer
+    margin-right: 40px
+
+.logInBtn
+    @include btn
+    background-color: $mainColor
+    color: $secondaryColor
+    margin-right: 16px
+    &:hover
+        @include hoverInvert
+
+.signUpBtn
+    @include btn
+    &:hover
+        @include hoverInvert
+
+.headerRight
+    display: flex
+
+.cartBtn
+    font-size: 18px
+    display: flex
+    flex-direction: row
+
+.faCart
+    font-size: 18px
+    margin-right: 8px
+
+.faChevron
+    margin-left: 8px
+    font-size: 12px
+
+.addressBtn
+    @include btn
+    background-color: $lightGrey
+    color: $secondaryColor
+    font-size: 14px
+    box-shadow: none
+    &:hover
+        background-color: #e2e2e2

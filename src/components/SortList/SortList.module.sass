@@ -1,0 +1,109 @@
+@import "../../utils/mixins"
+@import "../../utils/variables"
+
+.aside
+    padding: 0px 12px
+    width: 25%
+    min-width: 300px
+    details
+        width: 280px
+        button
+            @include btn
+            margin-right: 12px
+            background-color: $lightGrey
+            color: $secondaryColor
+            font-weight: 600
+            box-shadow: none
+    details[open]
+        margin-bottom: 28px
+    summary
+        list-style: none
+        cursor: pointer
+        font-weight: 500
+        display: flex
+        justify-content: space-between
+        margin-bottom: 16px
+        font-size: 22px
+
+.sortBy
+    display: flex
+    flex-direction: column
+
+.priceBtns
+    display: flex
+    flex-direction: row
+
+.radioLabel
+    position: relative
+    cursor: pointer
+    margin-bottom: 12px
+    display: flex
+    align-items: center
+
+.radioCheckmark
+    position: relative
+    display: inline-block
+    margin-top: auto
+    height: 16px
+    width: 16px
+    background-color: #ffffff
+    border: 3px solid #6b6b6b
+    border-radius: 100%
+    outline: none
+    margin-right: 8px
+    &::after
+        content: ""
+        display: none
+        position: absolute
+        top: 50%
+        left: 50%
+        font-size: 100px
+        width: 10px
+        height: 10px
+        background-color: $secondaryColor
+        transform: translate(-50%, -50%)
+        border-radius: 50%
+
+.radio
+    display: none
+
+.radio:checked ~ .radioCheckmark
+    border-color: $secondaryColor
+    &::after
+        display: block
+
+.range
+    background-color: $lightGrey
+    margin-right: 8px
+    cursor: pointer
+    height: 2px
+    &::-webkit-slider-thumb
+        width: 12px
+        height: 12px
+    &::-webkit-slider-runnable-track
+        background-color: $secondaryColor
+    &::-moz-range-thumb
+        width: 12px
+        height: 12px
+        border-radius: 50%
+        border: none
+        background-color: $secondaryColor
+    &::-moz-range-progress
+        background-color: $secondaryColor
+
+.fee
+    display: flex
+    align-items: center
+
+.active
+    border-radius: 50%
+    font-size: 12px
+    height: 28px
+    width: 28px
+    text-align: center
+    line-height: 28px
+    font-weight: 600
+    background-color: $secondaryColor
+    color: $mainColor
+    margin-left: auto
+    margin-right: 8px
