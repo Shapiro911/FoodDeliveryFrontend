@@ -7,7 +7,7 @@ import { helperReducer } from "./helper/reducer";
 const persistConfig = {
     key: "delivery",
     storage,
-    blacklist: ["helper", "restaurants"]
+    blacklist: ["helper"]
 }
 
 const persistedReducer = persistReducer(
