@@ -17,7 +17,7 @@ export const RestaurantList = () => {
     const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
     const [hasMore, setHasMore] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
-    const [pageMax] = useState<number>(1);
+    const [pageMax] = useState<number>(21);
     const [sortValues, setSortValues] = useState<SortValues>({ sortBy: "popular", priceRange: [], fee: "0" });
     const isLoading = useSelector(listLoading);
     const dispatch: AppDispatch = useDispatch();
