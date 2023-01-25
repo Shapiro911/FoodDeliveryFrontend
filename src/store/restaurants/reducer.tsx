@@ -1,17 +1,15 @@
 import { AnyAction } from "redux";
-import { Restaurant, Request } from "../../interfaces/restaurants.interface";
+import { Request } from "../../interfaces/restaurants.interface";
 import { Destination } from "../../interfaces/search.interface";
 import { RequestStatus } from "../../utils/enums";
 import { ActionType, ActionTypeRequestStatus } from "./actionTypes";
 
 type restaurantsState = {
-    restaurants: Array<Restaurant>,
     destination: Destination,
     request: Request
 }
 
 const initialState: restaurantsState = {
-    restaurants: [],
     destination: { address: "", latLng: [] },
     request: { status: RequestStatus.IDLE, error: "" }
 }
@@ -31,7 +29,6 @@ export const restaurantsReducer = (state: restaurantsState = initialState, actio
         case ActionTypeRequestStatus.REQUEST_RESTAURANTS_SUCCESS:
             return {
                 ...state,
-                restaurants: [...state.restaurants, ...action.payload],
                 request: {
                     ...state.request, status: RequestStatus.SUCCESS
                 }

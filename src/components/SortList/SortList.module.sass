@@ -10,7 +10,7 @@
         button
             @include btn
             margin-right: 12px
-            background-color: $lightGrey
+            background-color: $lightGray
             color: $secondaryColor
             font-weight: 600
             box-shadow: none
@@ -73,15 +73,22 @@
         display: block
 
 .range
-    background-color: $lightGrey
+    background-color: $lightGray
     margin-right: 8px
     cursor: pointer
     height: 2px
+    -webkit-appearance: none
     &::-webkit-slider-thumb
+        -webkit-appearance: none
         width: 12px
         height: 12px
-    &::-webkit-slider-runnable-track
+        border-radius: 50%
         background-color: $secondaryColor
+        margin-top: -5px
+    &::-webkit-slider-runnable-track
+        -webkit-appearance: none
+        background-color: $lightGray
+        height: 2px
     &::-moz-range-thumb
         width: 12px
         height: 12px
@@ -89,6 +96,16 @@
         border: none
         background-color: $secondaryColor
     &::-moz-range-progress
+        background-color: $secondaryColor
+    &::-ms-thumb
+        width: 12px
+        height: 12px
+        border-radius: 50%
+        border: none
+        background-color: $secondaryColor
+    &::-ms-fill-upper
+        background-color: $lightGray
+    &::-ms-fill-lower
         background-color: $secondaryColor
 
 .fee

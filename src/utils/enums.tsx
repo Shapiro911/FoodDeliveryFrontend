@@ -4,3 +4,9 @@ export enum RequestStatus {
     SUCCESS = 2,
     FAILURE = 3,
 }
+
+export enum SortValueKeys {
+    SORTBY = "sortBy",
+    PRICERANGE = "priceRange",
+    FEE = "fee"
+}

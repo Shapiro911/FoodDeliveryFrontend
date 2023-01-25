@@ -22,6 +22,7 @@ export function useHover<T extends HTMLElement>(): UseHoverType<T> {
             };
         }
         return;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ref.current]);
 
     return [ref, value];

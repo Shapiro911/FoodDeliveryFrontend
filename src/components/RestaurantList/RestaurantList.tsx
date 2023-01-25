@@ -10,41 +10,52 @@ import { Header } from "../Header/Header";
 import { Footer } from "../Footer/Footer";
 import { SortList } from "../SortList/SortList";
 import { SortValues } from "../../interfaces/restaurants.interface"
+import { CircularProgress } from "@mui/material";
 import ContentLoader from "styled-content-loader"
 
 export const RestaurantList = () => {
-    // const rList: Restaurant[] = useSelector(list);
     const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
-    const [hasMore, setHasMore] = useState<Boolean>(true);
+    const [hasMore, setHasMore] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
-    const [pageMax] = useState<number>(21);
+    const [pageMax] = useState<number>(1);
     const [sortValues, setSortValues] = useState<SortValues>({ sortBy: "popular", priceRange: [], fee: "0" });
     const isLoading = useSelector(listLoading);
     const dispatch: AppDispatch = useDispatch();
     const destination = useSelector(destinationLatLng);
 
     useEffect(() => {
-        fetchData();
-    }, [page]);
+        if (page === 1) {
+            fetchData([]);
+        } else {
+            fetchData(restaurantList)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps 
+    }, [page, destination]);
 
-    const fetchData = async () => {
-        const newRestaurants: Restaurant[] = await dispatch(getRestaurants(destination));
-
-        if (newRestaurants?.length > 0 && newRestaurants?.length !== pageMax) {
+    const fetchData = async (restaurantList: Restaurant[]) => {
+        const newRestaurants: Restaurant[] = await dispatch(getRestaurants(destination, sortValues, page, pageMax));
+        if (newRestaurants?.length !== pageMax) {
             setHasMore(false);
+            setRestaurantList([...restaurantList, ...newRestaurants]);
         }
         else {
+            setHasMore(true);
             setRestaurantList([...restaurantList, ...newRestaurants]);
-            console.log(newRestaurants)
         }
     }
 
-    const showMore = async () => {
+    const showMore = (): void => {
         setPage(page + 1);
     }
 
     const getSortValues = (sortValues: SortValues): void => {
         setSortValues(sortValues);
+        setRestaurantList([])
+        if (page === 1) {
+            fetchData([]);
+        } else {
+            setPage(1);
+        }
     }
 
     return (
@@ -52,33 +63,40 @@ export const RestaurantList = () => {
             <Header scrolled={false} />
             <main className={styles.main}>
                 <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />
-                {isLoading || restaurantList.length === 0 ?
-                    <div className={styles.restaurants}>
+                <div className={styles.restaurants}>
+                    {isLoading && restaurantList.length === 0 ?
                         <div className={styles.list}>
                             {Array(12).fill(0).map((_, index) => {
                                 return (
                                     <ContentLoader isLoading={isLoading} className={styles.loadingItem} key={index}>
-                                        <div></div>
-                                        <h3></h3>
-                                        <p></p>
+                                        <div>0</div>
+                                        <h3>0</h3>
+                                        <p>0</p>
                                         <div className={styles.rating}></div>
                                     </ContentLoader>
                                 );
                             }
                             )}
                         </div>
+                        :
+                        <>
+                            {restaurantList.length !== 0 ?
+                                <div className={styles.list}>
+                                    {restaurantList.map((restaurant) => {
+                                        return (
+                                            <RestaurantItem restaurant={restaurant} key={restaurant.id} />
+                                        )
+                                    })}
+                                </div> :
+                                <h2 className={styles.noResults}>No results</h2>}
+                        </>}
+                    <div className={styles.showMore}>
+                        {isLoading && restaurantList.length !== 0 ?
+                            <CircularProgress size={100} color="inherit" thickness={5} /> :
+                            <>{(hasMore && !isLoading) && <button onClick={showMore} className={styles.showMoreBtn}>Show more</button>}</>
+                        }
                     </div>
-                    :
-                    <div className={styles.restaurants}>
-                        <div className={styles.list}>
-                            {restaurantList && restaurantList.map((restaurant) => {
-                                return (
-                                    <RestaurantItem restaurant={restaurant} key={restaurant.id} />
-                                )
-                            })}
-                        </div>
-                        {hasMore && <button onClick={showMore} className={styles.showMore}>Show more</button>}
-                    </div>}
+                </div>
             </main>
             <Footer />
         </>

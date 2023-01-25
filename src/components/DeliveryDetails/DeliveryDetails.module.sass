@@ -1,0 +1,67 @@
+@import "../../utils/mixins"
+@import "../../utils/variables"
+
+.shade
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    min-height: 150vh
+    z-index: 3
+    background-color: rgba(0, 0, 0, 0.7)
+    text-align: center
+
+.menu
+    position: sticky
+    top: 10vh
+    background-color: $mainColor
+    opacity: 1
+    display: inline-block
+    text-align: left
+    padding: 24px
+    h1
+        font-size: 32px
+    h4
+        margin-left: 20px
+        margin-right: 20px
+    hr
+        background-color: $lightGray
+        height: 1px
+        border: none
+        margin: 20px 0
+
+.close
+    cursor: pointer
+    font-size: 24px
+    margin-bottom: 24px
+
+.detailsBlock
+    display: flex
+    align-items: center
+
+.detailsBtn
+    @include btn
+    margin-left: auto
+    padding: 12px
+    color: $secondaryColor
+    background-color: $lightGray
+    height: 36px
+    box-shadow: none
+    &:hover
+        @include hoverInvert
+
+.doneBtn
+    @include btn
+    width: 100%
+    justify-content: center
+    margin-top: 24px
+    border-radius: 8px
+    &:hover
+        @include hoverInvert
+
+.mapMarker
+    font-size: 24px
+
+.clock
+    font-size: 24px

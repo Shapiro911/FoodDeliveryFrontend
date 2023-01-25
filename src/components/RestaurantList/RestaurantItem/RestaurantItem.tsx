@@ -16,13 +16,14 @@ export const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
     const dispatch: AppDispatch = useDispatch();
 
     useEffect(() => {
-        fetchImages();
-    }, [])
+        const fetchImages = async () => {
+            const imageURL: string = await dispatch(getImage(restaurant.img));
+            setImage(imageURL);
+        }
 
-    const fetchImages = async () => {
-        const imageURL: string = await dispatch(getImage(restaurant.img));
-        setImage(imageURL);
-    }
+        fetchImages();
+        // eslint-disable-next-line react-hooks/exhaustive-deps 
+    }, [])
 
     return (
         <div className={styles.restaurant}>
@@ -36,9 +37,9 @@ export const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
             <div className={styles.info}>
                 <div className={styles.name}>
                     <h3>{restaurant.name}</h3>
-                    <div className={styles.rating}>{ }5</div>
+                    <div className={styles.rating}>{restaurant.rating}</div>
                 </div>
-                <p><span className={styles.fee}>{ } fee</span> • <span className={styles.duration}>{ }</span></p>
+                <p><span className={styles.fee}>{restaurant.fee === 0 ? "No" : restaurant.fee + "$"} fee</span> • <span className={styles.duration}>{restaurant.duration} min</span></p>
             </div>
         </div>
     )

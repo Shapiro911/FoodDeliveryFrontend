@@ -9,6 +9,8 @@ import { addDestination } from "../../store/restaurants/actionCreators";
 import styles from "./AddressSearchBar.module.sass"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { changeDeliveryDetailsVisibility } from "../../store/helper/actionCreators";
+import $ from "jquery"
 
 export const AddressSearchBar = () => {
     const [address, setAddress] = useState<string>("");
@@ -27,6 +29,8 @@ export const AddressSearchBar = () => {
             address: address,
             latLng: [latLng.lat, latLng.lng]
         }))
+        dispatch(changeDeliveryDetailsVisibility(false));
+        $('body').css('overflow', 'auto');
     };
 
     const searchOptions = {

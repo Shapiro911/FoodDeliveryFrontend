@@ -11,7 +11,7 @@ export const SortList = ({ sortValuesProp, sendSortValues }: { sortValuesProp: S
     const [isOpenFee, setOpenFee] = useState<boolean>(true);
     const [rangeValue, setRangeValue] = useState<string>("0");
 
-    const handleSort = (key: keyof SortValues, value: any) => {
+    const handleSort = (key: keyof SortValues, value: any): void => {
         const sortValues = sortValuesProp;
         sortValues[key] = value;
         sendSortValues(sortValues);
@@ -24,6 +24,7 @@ export const SortList = ({ sortValuesProp, sendSortValues }: { sortValuesProp: S
         }
         else { priceRangeTemp.push(value); }
         setPriceRange(priceRangeTemp);
+        handleSort("priceRange", priceRangeTemp)
     }
 
     const setActive = (event: React.SyntheticEvent): void => {
@@ -43,7 +44,7 @@ export const SortList = ({ sortValuesProp, sendSortValues }: { sortValuesProp: S
                 <label className={styles.radioLabel}>
                     <input onClick={() => handleSort("sortBy", "popular")} type="radio" defaultChecked name="sort" className={styles.radio}></input>
                     <span className={styles.radioCheckmark}></span>
-                    Most popular
+                    Most popular (default)
                 </label>
                 <label className={styles.radioLabel}>
                     <input onClick={() => handleSort("sortBy", "rating")} type="radio" name="sort" className={styles.radio}></input>
@@ -65,10 +66,10 @@ export const SortList = ({ sortValuesProp, sendSortValues }: { sortValuesProp: S
                         <FontAwesomeIcon className={styles.summaryArrow} icon={faAngleUp} />
                     }</summary>
                 <div className={styles.priceBtns}>
-                    <button onClick={(event) => { setActive(event); changePriceRange(1); handleSort("priceRange", priceRange) }}>$</button>
-                    <button onClick={(event) => { setActive(event); changePriceRange(2); handleSort("priceRange", priceRange) }}>$$</button>
-                    <button onClick={(event) => { setActive(event); changePriceRange(3); handleSort("priceRange", priceRange) }}>$$$</button>
-                    <button onClick={(event) => { setActive(event); changePriceRange(4); handleSort("priceRange", priceRange) }}>$$$$</button>
+                    <button onClick={(event) => { setActive(event); changePriceRange(1); }}>$</button>
+                    <button onClick={(event) => { setActive(event); changePriceRange(2); }}>$$</button>
+                    <button onClick={(event) => { setActive(event); changePriceRange(3); }}>$$$</button>
+                    <button onClick={(event) => { setActive(event); changePriceRange(4); }}>$$$$</button>
                 </div>
             </details>
             <details open={true}>

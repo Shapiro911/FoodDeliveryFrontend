@@ -1,5 +1,5 @@
 import { AppDispatch } from "..";
-import { Restaurant } from "../../interfaces/restaurants.interface";
+import { Restaurant, SortValues } from "../../interfaces/restaurants.interface";
 import { Destination } from "../../interfaces/search.interface";
 import { ActionType, ActionTypeRequestStatus } from "./actionTypes";
 
@@ -22,13 +22,14 @@ export const getRestaurantsFailure = (error: string) => ({
     payload: error
 })
 
-export const getRestaurants = (coordinates: number[]): (dispatch: AppDispatch) => Promise<Restaurant[]> => async (dispatch: AppDispatch) => {
+export const getRestaurants = (coordinates: number[], sortValues: SortValues, page: number, pageSize: number): (dispatch: AppDispatch) => Promise<Restaurant[]> => async (dispatch: AppDispatch) => {
     let res: Restaurant[] = [];
-    const param = `?coordinates=${coordinates}`;
+    const param = `?coordinates=${coordinates}&page=${page}&pageSize=${pageSize}`;
     dispatch(getRestaurantsLoading());
     await fetch(process.env.REACT_APP_API_KEY + "restaurants" + param, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" }
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(sortValues),
     }).then(response => {
         if (!response.ok) {
             throw ("error");

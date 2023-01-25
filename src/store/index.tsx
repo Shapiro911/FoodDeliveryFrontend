@@ -2,17 +2,19 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { restaurantsReducer } from "./restaurants/reducer";
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from "redux-persist/lib/storage";
+import { helperReducer } from "./helper/reducer";
 
 const persistConfig = {
     key: "delivery",
     storage,
-    // blacklist: ["restaurants"]
+    blacklist: ["helper"]
 }
 
 const persistedReducer = persistReducer(
     persistConfig,
     combineReducers({
         restaurants: restaurantsReducer,
+        helper: helperReducer
     })
 );
 
@@ -20,6 +22,7 @@ const persistedReducer = persistReducer(
 export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        immutableCheck: false,
         serializableCheck: {
             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         }

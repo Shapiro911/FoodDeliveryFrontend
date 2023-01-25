@@ -5,6 +5,22 @@
 
 footer
     padding: 72px 40px 88px 40px
+    ul
+        @include unorderedList
+        columns: 2
+        li
+            font-size: 16px
+            margin-bottom: 16px
+            cursor: pointer
+            a
+                @include linkNoUnderline
+            &:hover
+                text-decoration: underline
+    hr
+        background-color: rgb(246, 246, 246)
+        border: none
+        margin: 40px
+        height: 1px
 
 .footerHigh
     display: flex
@@ -21,26 +37,8 @@ footer
         margin-right: 24px
         cursor: pointer
 
-hr
-    background-color: rgb(246, 246, 246)
-    border: none
-    margin: 40px
-    height: 1px
-
 .footerLinks
     flex: 1
 
 .footerLogo
     flex-grow: 0.5
-
-ul
-    @include unorderedList
-    columns: 2
-    li
-        font-size: 16px
-        margin-bottom: 16px
-        cursor: pointer
-        a
-            @include linkNoUnderline
-        &:hover
-            text-decoration: underline
