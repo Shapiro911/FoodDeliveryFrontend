@@ -5,21 +5,26 @@ import { Restaurant } from "../../interfaces/restaurants.interface";
 import { getRestaurants } from "../../store/restaurants/actionCreators";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store";
-import { destinationLatLng, listLoading } from "../../store/restaurants/selectors";
+import { destinationLatLng, restaurantListLoading } from "../../store/restaurants/selectors";
 import { Header } from "../Header/Header";
 import { Footer } from "../Footer/Footer";
 import { SortList } from "../SortList/SortList";
 import { SortValues } from "../../interfaces/restaurants.interface"
 import { CircularProgress } from "@mui/material";
 import ContentLoader from "styled-content-loader"
+import { pageLimit } from "../../utils/const";
+import { useWindowDimensions } from "../../utils/hooks";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 export const RestaurantList = () => {
     const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
     const [hasMore, setHasMore] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
-    const [pageMax] = useState<number>(21);
+    const [pageMax] = useState<number>(pageLimit);
     const [sortValues, setSortValues] = useState<SortValues>({ sortBy: "popular", priceRange: [], fee: "0" });
-    const isLoading = useSelector(listLoading);
+    const { height, width } = useWindowDimensions();
+    const isLoading = useSelector(restaurantListLoading);
     const dispatch: AppDispatch = useDispatch();
     const destination = useSelector(destinationLatLng);
 
@@ -62,7 +67,15 @@ export const RestaurantList = () => {
         <>
             <Header scrolled={false} />
             <main className={styles.main}>
-                <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />
+                {width > 480 && height ? <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />
+                    :
+                    <details className={styles.filterDetails}>
+                        <summary className={styles.filterDetailsSummary}>
+                            <span>Filter</span>
+                            <FontAwesomeIcon className={styles.faChevron} icon={faChevronDown} />
+                        </summary>
+                        <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />
+                    </details>}
                 <div className={styles.restaurants}>
                     {isLoading && restaurantList.length === 0 ?
                         <div className={styles.list}>

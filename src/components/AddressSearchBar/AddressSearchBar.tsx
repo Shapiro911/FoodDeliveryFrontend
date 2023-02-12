@@ -74,7 +74,7 @@ export const AddressSearchBar = () => {
                 )
                 }
             </PlacesAutocomplete >
-            <button className={styles.btn} onClick={() => handleSelect(address)}>Find Food</button>
+            <button className={styles.findBtn} onClick={() => handleSelect(address)}>Find Food</button>
         </div >
     )
 }

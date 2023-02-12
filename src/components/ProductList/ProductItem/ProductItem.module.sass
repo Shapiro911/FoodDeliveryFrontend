@@ -1,0 +1,60 @@
+@import "../../../utils/mixins"
+@import "../../../utils/variables"
+
+.addBtn
+    @include btn
+    position: absolute
+    right: 12px
+    top: 12px
+    z-index: 2
+    font-size: 20px
+    width: 36px
+    height: 36px
+    display: flex
+    justify-content: center
+    align-items: center
+    &:hover
+        @include hoverInvert
+    span
+        font-size: 24px
+
+.image
+    position: relative
+    overflow: hidden
+    height: 128px
+    width: 100%
+    img
+        height: inherit
+        width: inherit
+        object-fit: cover
+
+.product
+    cursor: pointer
+    display: flex
+    min-width: 200px
+    padding: 8px
+    box-sizing: border-box
+    &:hover
+        box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16)
+
+.price
+    font-size: 14px
+
+.name
+    font-size: 16px
+    font-weight: 700
+    margin-bottom: 4px
+
+.productInfo
+    flex-grow: 1
+    flex-basis: 400px
+    margin-right: 8px
+
+@media screen and (max-width: 480px)
+    .product
+        min-width: unset
+    .productInfo
+        flex-basis: 250px
+    .image
+        width: unset
+        img

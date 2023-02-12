@@ -2,7 +2,6 @@ import { RequestStatus } from "../../utils/enums";
 
 export enum ActionType {
     ADD_DESTINATION = "addDestination",
-    GET_RESTAURANTS = "getRestaurants",
 }
 
 export enum ActionTypeRequestStatus {

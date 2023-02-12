@@ -4,7 +4,8 @@ export interface Restaurant {
     img: string,
     duration: string,
     rating: number,
-    fee: number
+    fee: number,
+    price: number
 }
 
 export interface SortValues {

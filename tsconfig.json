@@ -36,6 +36,7 @@
     "src"
   ],
   "files": [
-    "./node_modules/redux-persist/types/integration/react.d.ts"
+    "./node_modules/redux-persist/types/integration/react.d.ts",
+    "./node_modules/@types/react-scroll/index.d.ts"
   ]
 }

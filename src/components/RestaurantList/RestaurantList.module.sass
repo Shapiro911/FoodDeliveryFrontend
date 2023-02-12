@@ -27,7 +27,6 @@
         @include hoverInvert
 
 .loadingItem
-    max-width: 456px
     min-width: 200px
     position: relative
     div
@@ -55,3 +54,36 @@
 
 .noResults
     margin: 0px auto
+
+.filterDetails
+    position: sticky
+    top: 0px
+    z-index: 4
+    background-color: $mainColor
+
+.filterDetailsSummary
+    font-size: 36px
+    user-select: none
+    cursor: pointer
+    list-style: none
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin-bottom: 8px
+
+.faChevron
+    font-size: 20px
+    color: $secondaryColor
+
+@media screen and (max-width: 480px)
+    .list
+        grid-template-columns: repeat(1, 1fr)
+    .main
+        flex-direction: column
+        margin-top: 20px
+    .restaurants
+        min-width: unset
+    .noResults
+        margin-top: 16px
+    .showMore
+        margin: 20px auto

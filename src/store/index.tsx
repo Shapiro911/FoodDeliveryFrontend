@@ -3,6 +3,7 @@ import { restaurantsReducer } from "./restaurants/reducer";
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from "redux-persist/lib/storage";
 import { helperReducer } from "./helper/reducer";
+import { productsReducer } from "./products/reducer";
 
 const persistConfig = {
     key: "delivery",
@@ -14,7 +15,8 @@ const persistedReducer = persistReducer(
     persistConfig,
     combineReducers({
         restaurants: restaurantsReducer,
-        helper: helperReducer
+        helper: helperReducer,
+        products: productsReducer
     })
 );
 

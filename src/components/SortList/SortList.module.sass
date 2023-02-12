@@ -5,6 +5,8 @@
     padding: 0px 12px
     width: 25%
     min-width: 300px
+    position: sticky
+    background-color: $mainColor
     details
         width: 280px
         button
@@ -124,3 +126,7 @@
     color: $mainColor
     margin-left: auto
     margin-right: 8px
+
+@media screen and (max-width: 480px)
+    .aside
+        padding: unset

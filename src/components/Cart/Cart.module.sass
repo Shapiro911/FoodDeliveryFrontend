@@ -1,0 +1,45 @@
+@import "../../utils/mixins"
+@import "../../utils/variables"
+
+.cart
+    position: absolute
+    z-index: 3
+    left: -350px
+    top: 54px
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px
+    transition: opacity 500ms ease 0s
+    background: rgb(255, 255, 255)
+    padding: 16px 24px
+    width: 432px
+    overflow-y: scroll
+    display: flex
+    flex-direction: column
+    max-height: calc(-200px + 100vh)
+    opacity: 1
+
+.cartTransition
+    opacity: 0
+
+.close
+    margin-bottom: 24px
+    font-size: 20px
+    margin-right: auto
+    cursor: pointer
+
+.checkoutBtn
+    @include btn
+    border-radius: 5px
+    width: 100%
+    margin-top: auto
+    font-size: 18px
+    font-weight: 600
+    &:hover
+        @include hoverInvert
+
+@media screen and (max-width: 480px)
+    .cart
+        position: fixed
+        bottom: 0px
+        left: 0px
+        top: 0px
+        max-height: unset

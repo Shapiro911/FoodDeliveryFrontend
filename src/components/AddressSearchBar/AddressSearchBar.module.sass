@@ -13,7 +13,7 @@
     &::placeholder
         color: grey
 
-.btn
+.findBtn
     @include btn
     border-radius: 8px
     margin-left: 8px
@@ -60,7 +60,7 @@
 .searchBar
     display: flex
     flex-direction: column
-    width: 500px
+    flex-grow: 1
     position: relative
 
 .suggestionContainer
@@ -75,3 +75,12 @@ h4
 .suggestionText
     color: rgb(84, 84, 84)
     font-size: 14px
+
+@media screen and (max-width: 480px)
+    .autocomplete
+        flex-direction: column
+    .findBtn
+        margin-top: 16px
+        margin-left: unset
+    .searchBar
+        width: 100%

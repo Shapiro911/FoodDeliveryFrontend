@@ -12,7 +12,7 @@ header
     display: flex
     flex-direction: row
     align-items: center
-    min-width: 1024px
+    min-width: 760px
     justify-content: space-between
     box-sizing: border-box
 
@@ -46,6 +46,7 @@ header
 
 .headerRight
     display: flex
+    position: relative
 
 .cartBtn
     font-size: 18px
@@ -68,3 +69,19 @@ header
     box-shadow: none
     &:hover
         background-color: #e2e2e2
+
+@media screen and (max-width: 480px)
+    header
+        padding: 20px
+        min-width: unset
+    .cartBtn
+        position: fixed
+        bottom: 20px
+        left: 50%
+        width: 95%
+        transform: translateX(-50%)
+        z-index: 2
+    .bars
+        margin-right: 16px
+    .addressBtn
+        margin-left: 24px

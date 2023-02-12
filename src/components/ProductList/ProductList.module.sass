@@ -1,0 +1,67 @@
+.productList
+    display: flex
+    flex-direction: column
+    flex-grow: 1
+    min-width: 800px
+    max-width: 1920px
+    width: 100%
+
+.loadingList
+    display: grid
+    padding: 0px 40px
+    gap: 20px 24px
+    grid-template-columns: repeat(3, 1fr)
+    flex-grow: 1
+
+.restaurantInfo
+    padding: 0px 40px
+    margin-bottom: 56px
+    h1
+        font-size: 36px
+        margin-bottom: 8px
+
+.duration
+    color: rgb(107, 107, 107)
+
+.loadingItem
+    min-width: 200px
+    position: relative
+    div
+        height: 128px
+    h3
+        margin-top: 12px
+        margin-bottom: 12px
+        height: 14px
+        width: 60%
+    p
+        margin-bottom: 12px
+        height: 14px
+        width: 40%
+
+.loadingRestaurantInfo
+    max-width: 456px
+    min-width: 200px
+    padding: 0px 40px
+    margin-bottom: 24px
+    h1
+        width: 70%
+        margin-bottom: 12px
+    p
+        width: 40%
+        margin-bottom: 8px
+
+.selection
+    display: flex
+    padding: 0px 40px
+
+.list
+    display: flex
+    flex-direction: column
+
+@media screen and (max-width: 480px)
+    .selection
+        padding: 0px 20px
+    .restaurantInfo
+        padding: 0px 20px
+    .productList
+        min-width: unset

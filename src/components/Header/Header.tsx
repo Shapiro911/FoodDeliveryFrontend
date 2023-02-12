@@ -10,20 +10,33 @@ import { AppDispatch } from "../../store"
 import { changeDeliveryDetailsVisibility } from "../../store/helper/actionCreators"
 import { deliveryDetailsVisibility } from "../../store/helper/selectors"
 import $ from "jquery"
+import { Cart } from "../Cart/Cart"
+import { cart } from "../../store/products/selectors"
 
 export const Header = ({ scrolled }: { scrolled: boolean }) => {
     const address = useSelector(destinationAddress)
     const [cartVisibility, setCartVisibility] = useState<boolean>(false);
+    const [cartTransition, setCartTransition] = useState<boolean>(false);
+    const [cartTrigger, setCartTrigger] = useState<boolean>(false);
     const isdeliveryDetailsVisible = useSelector(deliveryDetailsVisibility);
+    const cartProducts = useSelector(cart);
     const dispatch: AppDispatch = useDispatch();
 
-    const handleCart = (): void => {
-        setCartVisibility(!cartVisibility);
+    const handleCart = (visibility: boolean): void => {
+        if (visibility) {
+            setCartTrigger(!cartTrigger);
+            setCartTransition(false);
+        }
+        setCartVisibility(visibility);
     }
 
     const openDeliveryDetails = (): void => {
         dispatch(changeDeliveryDetailsVisibility(true));
         $('body').css('overflow', 'hidden');
+    }
+
+    const handleCartTransition = (transition: boolean): void => {
+        setCartTransition(transition);
     }
 
     return (
@@ -37,13 +50,11 @@ export const Header = ({ scrolled }: { scrolled: boolean }) => {
                 </div>
                 {address ? <button className={styles.addressBtn} onClick={openDeliveryDetails}>{address}</button> : ""}
                 {address ? <div className={styles.headerRight}>
-                    <button className={`${styles.signUpBtn} ${styles.cartBtn}`} onClick={handleCart}>
+                    <button className={`${styles.signUpBtn} ${styles.cartBtn}`} onClick={() => handleCart(true)}>
                         <FontAwesomeIcon className={styles.faCart} icon={faCartShopping} />
-                        { } cart
+                        {cartProducts.length} cart
                         <FontAwesomeIcon className={styles.faChevron} icon={faChevronDown} /></button>
-                    <div className={styles.cart}>
-                        { }
-                    </div>
+                    {cartVisibility && <Cart closeCart={handleCart} setCartTransition={handleCartTransition} cartTransition={cartTransition} trigger={cartTrigger} />}
                 </div>
                     :
                     <div className={styles.headerRight}>
