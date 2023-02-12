@@ -10,11 +10,13 @@ import styles from "./AddressSearchBar.module.sass"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { changeDeliveryDetailsVisibility } from "../../store/helper/actionCreators";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import $ from "jquery"
 
 export const AddressSearchBar = () => {
     const [address, setAddress] = useState<string>("");
     const dispatch: AppDispatch = useDispatch();
+    const navigate: NavigateFunction = useNavigate();
 
     const handleChange = (address: string): void => {
         setAddress(address);
@@ -22,14 +24,15 @@ export const AddressSearchBar = () => {
 
     const handleSelect = async (address: string) => {
         const latLng = await geocodeByAddress(address)
-            .then(results => getLatLng(results[0]))
+            .then(results => getLatLng(results[0]));
 
         setAddress(address);
         dispatch(addDestination({
             address: address,
             latLng: [latLng.lat, latLng.lng]
-        }))
+        }));
         dispatch(changeDeliveryDetailsVisibility(false));
+        navigate("/")
         $('body').css('overflow', 'auto');
     };
 
