@@ -71,8 +71,7 @@ export const RestaurantList = () => {
                 {width > 480 && height ? <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />
                     :
                     <details className={styles.filterDetails}>
-                        <summary className={styles.filterDetailsSummary} onClick={() => { setOpenSort(!isOpenSort) }}>
-                            <span>Filter</span>
+                        <summary className={styles.filterDetailsSummary} onClick={() => { setOpenSort(!isOpenSort) }}>Filter
                             {isOpenSort ?
                                 <FontAwesomeIcon className={styles.summaryArrow} icon={faAngleDown} />
                                 :
