@@ -23,9 +23,10 @@
         cursor: pointer
         font-weight: 500
         display: flex
-        justify-content: space-between
         margin-bottom: 16px
         font-size: 22px
+        &::-webkit-details-marker
+            display: none
 
 .sortBy
     display: flex
@@ -126,6 +127,9 @@
     color: $mainColor
     margin-left: auto
     margin-right: 8px
+
+.summaryArrow
+    margin-left: auto
 
 @media screen and (max-width: 480px)
     .aside

@@ -15,7 +15,7 @@ import ContentLoader from "styled-content-loader"
 import { pageLimit } from "../../utils/const";
 import { useWindowDimensions } from "../../utils/hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
 export const RestaurantList = () => {
     const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
@@ -23,6 +23,7 @@ export const RestaurantList = () => {
     const [page, setPage] = useState<number>(1);
     const [pageMax] = useState<number>(pageLimit);
     const [sortValues, setSortValues] = useState<SortValues>({ sortBy: "popular", priceRange: [], fee: "0" });
+    const [isOpenSort, setOpenSort] = useState<boolean>(true);
     const { height, width } = useWindowDimensions();
     const isLoading = useSelector(restaurantListLoading);
     const dispatch: AppDispatch = useDispatch();
@@ -70,9 +71,13 @@ export const RestaurantList = () => {
                 {width > 480 && height ? <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />
                     :
                     <details className={styles.filterDetails}>
-                        <summary className={styles.filterDetailsSummary}>
+                        <summary className={styles.filterDetailsSummary} onClick={() => { setOpenSort(!isOpenSort) }}>
                             <span>Filter</span>
-                            <FontAwesomeIcon className={styles.faChevron} icon={faChevronDown} />
+                            {isOpenSort ?
+                                <FontAwesomeIcon className={styles.summaryArrow} icon={faAngleDown} />
+                                :
+                                <FontAwesomeIcon className={styles.summaryArrow} icon={faAngleUp} />
+                            }
                         </summary>
                         <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />
                     </details>}
