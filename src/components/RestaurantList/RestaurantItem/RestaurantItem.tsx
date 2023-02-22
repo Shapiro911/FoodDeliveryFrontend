@@ -36,7 +36,7 @@ export const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
             <div className={styles.image}>
                 <img src={image} alt="restaurantImage" className={styles.img}></img>
                 <div ref={hoverRef as React.RefObject<HTMLDivElement>}>
-                    <FontAwesomeIcon className={`${styles.favourite} ${favourite ? styles.favouriteChecked : ""}`} icon={favourite || isHovered ? faHeart : farHeart} onClick={(event) => { addFavourite(event) }} />
+                    <FontAwesomeIcon data-testid="favouriteBtn" className={`${styles.favourite} ${favourite ? styles.favouriteChecked : "unchecked"}`} icon={favourite || isHovered ? faHeart : farHeart} onClick={(event) => { addFavourite(event) }} />
                 </div>
                 <div className={styles.blur}></div>
             </div>

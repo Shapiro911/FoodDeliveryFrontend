@@ -32,15 +32,15 @@ export const getRestaurants = (coordinates: number[], sortValues: SortValues, pa
         body: JSON.stringify(sortValues),
     }).then(response => {
         if (!response.ok) {
-            throw ("error");
+            throw Error("Could not fetch the data for that resource");
         }
         return response.json();
-    }).then((data) => {
+    }).then(data => {
         dispatch(getRestaurantsSuccess(data));
         return res = data;
     }).catch(err => {
-        dispatch(getRestaurantsFailure(err));
-        return res = err;
+        dispatch(getRestaurantsFailure(err.message));
+        return res = err.message;
     })
     return res;
 }
@@ -50,14 +50,14 @@ export const getImage = (image: string): () => Promise<string> => async () => {
     await fetch(process.env.REACT_APP_GOOGLE_STORAGE_KEY + "restaurants/" + image)
         .then(async (response) => {
             if (!response.ok) {
-                throw ("error");
+                throw Error("Could not fetch image");
             }
             const blob = await response.blob()
             res = URL.createObjectURL(blob);
             return res;
         })
         .catch(err => {
-            return res = err;
+            return res = err.message;
         })
     return res;
 }

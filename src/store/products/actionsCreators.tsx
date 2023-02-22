@@ -29,15 +29,15 @@ export const getProducts = (restaurantId: string | undefined): (dispatch: AppDis
         headers: { "Content-Type": "application/json" },
     }).then((response) => {
         if (!response.ok) {
-            throw ("error");
+            throw Error("Could not fetch the data for that resource");
         }
         return response.json();
     }).then((data) => {
         dispatch(getProductsSuccess());
         return res = data;
     }).catch(err => {
-        dispatch(getProductsFailure(err));
-        return res = err;
+        dispatch(getProductsFailure(err.message));
+        return res = err.message;
     })
     return res;
 }

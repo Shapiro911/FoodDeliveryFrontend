@@ -11,7 +11,7 @@ const persistConfig = {
     blacklist: ["helper"]
 }
 
-const persistedReducer = persistReducer(
+export const persistedReducer = persistReducer(
     persistConfig,
     combineReducers({
         restaurants: restaurantsReducer,
@@ -36,3 +36,5 @@ export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>
 
 export type AppDispatch = typeof store.dispatch
+
+export type AppStore = typeof store

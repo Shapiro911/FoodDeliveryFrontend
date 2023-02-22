@@ -25,6 +25,7 @@ export const ProductList = () => {
     const { restaurantId } = useParams();
 
     useEffect(() => {
+        document.title = restaurant.name;
         fetchData();
         // eslint-disable-next-line react-hooks/exhaustive-deps 
     }, [restaurantId])

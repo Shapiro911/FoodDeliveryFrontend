@@ -1,5 +1,5 @@
 import styles from "./RestaurantList.module.sass"
-import { useState, useEffect } from "react";
+import { useState, useEffect, PropsWithChildren } from "react";
 import { RestaurantItem } from "./RestaurantItem/RestaurantItem";
 import { Restaurant } from "../../interfaces/restaurants.interface";
 import { getRestaurants } from "../../store/restaurants/actionCreators";
@@ -17,7 +17,7 @@ import { useWindowDimensions } from "../../utils/hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
-export const RestaurantList = () => {
+export const RestaurantList: React.FC<PropsWithChildren> = () => {
     const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
     const [hasMore, setHasMore] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
