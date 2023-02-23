@@ -12,6 +12,7 @@ import { NavLink } from "react-router-dom"
 
 export const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
     const [image, setImage] = useState<string>("");
+    const [imageFetched, setImageFetched] = useState<boolean>(false);
     const [favourite, setFavourite] = useState<boolean>(false);
     const [hoverRef, isHovered] = useHover();
     const dispatch: AppDispatch = useDispatch();
@@ -19,6 +20,7 @@ export const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
     useEffect(() => {
         const fetchImages = async () => {
             const imageURL: string = await dispatch(getImage(restaurant.img));
+            setImageFetched(true);
             setImage(imageURL);
         }
 
@@ -34,11 +36,11 @@ export const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
     return (
         <NavLink className={styles.restaurant} to={`/restaurant/${restaurant.id}`} state={{ restaurant: restaurant }}>
             <div className={styles.image}>
-                <img src={image} alt="restaurantImage" className={styles.img}></img>
+                {imageFetched ? <img src={image} alt="restaurantImage" className={styles.img}></img> : <div className={styles.img}></div>}
                 <div ref={hoverRef as React.RefObject<HTMLDivElement>}>
                     <FontAwesomeIcon data-testid="favouriteBtn" className={`${styles.favourite} ${favourite ? styles.favouriteChecked : "unchecked"}`} icon={favourite || isHovered ? faHeart : farHeart} onClick={(event) => { addFavourite(event) }} />
                 </div>
-                <div className={styles.blur}></div>
+                {image ? <div className={styles.blur}></div> : ""}
             </div>
             <div className={styles.info}>
                 <div className={styles.name}>

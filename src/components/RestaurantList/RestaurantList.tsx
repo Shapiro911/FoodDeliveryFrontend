@@ -68,7 +68,14 @@ export const RestaurantList: React.FC<PropsWithChildren> = () => {
         <>
             <Header scrolled={false} />
             <main className={styles.main}>
-                {width > 480 && height ? <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />
+                {width > 480 && height ?
+                    <>
+                        {isLoading ?
+                            <ContentLoader isLoading={isLoading}>
+                                <p>0</p>
+                                <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />
+                            </ContentLoader> : <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />}
+                    </>
                     :
                     <details className={styles.filterDetails}>
                         <summary className={styles.filterDetailsSummary} onClick={() => { setOpenSort(!isOpenSort) }}>Filter

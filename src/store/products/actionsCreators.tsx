@@ -37,7 +37,7 @@ export const getProducts = (restaurantId: string | undefined): (dispatch: AppDis
         return res = data;
     }).catch(err => {
         dispatch(getProductsFailure(err.message));
-        return res = err.message;
+        return err.message;
     })
     return res;
 }

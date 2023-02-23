@@ -40,7 +40,7 @@ export const getRestaurants = (coordinates: number[], sortValues: SortValues, pa
         return res = data;
     }).catch(err => {
         dispatch(getRestaurantsFailure(err.message));
-        return res = err.message;
+        return err.message;
     })
     return res;
 }
@@ -57,7 +57,7 @@ export const getImage = (image: string): () => Promise<string> => async () => {
             return res;
         })
         .catch(err => {
-            return res = err.message;
+            return err.message;
         })
     return res;
 }
