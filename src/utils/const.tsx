@@ -1,1 +1,1 @@
-export const pageLimit = 2;
+export const PAGE_LIMIT = 21;

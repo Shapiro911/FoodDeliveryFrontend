@@ -1,5 +1,5 @@
 import styles from "./RestaurantList.module.sass"
-import { useState, useEffect, PropsWithChildren } from "react";
+import { useState, useEffect, PropsWithChildren, ChangeEvent } from "react";
 import { RestaurantItem } from "./RestaurantItem/RestaurantItem";
 import { Restaurant } from "../../interfaces/restaurants.interface";
 import { getRestaurants } from "../../store/restaurants/actionCreators";
@@ -12,7 +12,7 @@ import { SortList } from "../SortList/SortList";
 import { SortValues } from "../../interfaces/restaurants.interface"
 import { CircularProgress } from "@mui/material";
 import ContentLoader from "styled-content-loader"
-import { pageLimit } from "../../utils/const";
+import { PAGE_LIMIT } from "../../utils/const";
 import { useWindowDimensions } from "../../utils/hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
@@ -21,7 +21,8 @@ export const RestaurantList: React.FC<PropsWithChildren> = () => {
     const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
     const [hasMore, setHasMore] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
-    const [pageMax] = useState<number>(pageLimit);
+    const [pageMax] = useState<number>(PAGE_LIMIT);
+    const [search, setSearch] = useState<string>("");
     const [sortValues, setSortValues] = useState<SortValues>({ sortBy: "popular", priceRange: [], fee: "0" });
     const [isOpenSort, setOpenSort] = useState<boolean>(true);
     const { height, width } = useWindowDimensions();
@@ -39,7 +40,7 @@ export const RestaurantList: React.FC<PropsWithChildren> = () => {
     }, [page, destination]);
 
     const fetchData = async (restaurantList: Restaurant[]) => {
-        const newRestaurants: Restaurant[] = await dispatch(getRestaurants(destination, sortValues, page, pageMax));
+        const newRestaurants: Restaurant[] = await dispatch(getRestaurants(destination, sortValues, page, pageMax, search));
         if (newRestaurants?.length !== pageMax) {
             setHasMore(false);
             setRestaurantList([...restaurantList, ...newRestaurants]);
@@ -64,6 +65,23 @@ export const RestaurantList: React.FC<PropsWithChildren> = () => {
         }
     }
 
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setSearch(event.target.value);
+    }
+
+    useEffect(() => {
+        const searchTimeout = setTimeout(() => {
+            setRestaurantList([])
+            if (page === 1) {
+                fetchData([]);
+            } else {
+                setPage(1);
+            }
+        }, 500);
+
+        return () => clearTimeout(searchTimeout);
+    }, [search])
+
     return (
         <>
             <Header scrolled={false} />
@@ -72,7 +90,7 @@ export const RestaurantList: React.FC<PropsWithChildren> = () => {
                     <>
                         {isLoading ?
                             <ContentLoader isLoading={isLoading}>
-                                <p>0</p>
+                                <p className={styles.loadingSort}>0</p>
                                 <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />
                             </ContentLoader> : <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />}
                     </>
@@ -88,6 +106,7 @@ export const RestaurantList: React.FC<PropsWithChildren> = () => {
                         <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />
                     </details>}
                 <div className={styles.restaurants}>
+                    <input value={search} onChange={(event) => { handleChange(event) }} placeholder="Find restaurant" className={styles.searchBar} />
                     {isLoading && restaurantList.length === 0 ?
                         <div className={styles.list}>
                             {Array(12).fill(0).map((_, index) => {

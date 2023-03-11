@@ -22,14 +22,14 @@ export const getRestaurantsFailure = (error: string) => ({
     payload: error
 })
 
-export const getRestaurants = (coordinates: number[], sortValues: SortValues, page: number, pageSize: number): (dispatch: AppDispatch) => Promise<Restaurant[]> => async (dispatch: AppDispatch) => {
+export const getRestaurants = (coordinates: number[], sortValues: SortValues, page: number, pageSize: number, searchText: string): (dispatch: AppDispatch) => Promise<Restaurant[]> => async (dispatch: AppDispatch) => {
     let res: Restaurant[] = [];
     const param = `?coordinates=${coordinates}&page=${page}&pageSize=${pageSize}`;
     dispatch(getRestaurantsLoading());
     await fetch(process.env.REACT_APP_API_KEY + "restaurants" + param, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(sortValues),
+        body: JSON.stringify({ sortValues: sortValues, searchText: searchText }),
     }).then(response => {
         if (!response.ok) {
             throw Error("Could not fetch the data for that resource");
@@ -61,4 +61,3 @@ export const getImage = (image: string): () => Promise<string> => async () => {
         })
     return res;
 }
-
