@@ -88,11 +88,13 @@ export const RestaurantList: React.FC<PropsWithChildren> = () => {
             <main className={styles.main}>
                 {width > 480 && height ?
                     <>
-                        {isLoading ?
-                            <ContentLoader isLoading={isLoading}>
-                                <p className={styles.loadingSort}>0</p>
-                                <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />
-                            </ContentLoader> : <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />}
+                        <div className={styles.aside}>
+                            {isLoading ?
+                                <ContentLoader isLoading={isLoading} className={styles.sortLoader}>
+                                    <p className={styles.loadingSort}>0</p>
+                                </ContentLoader> : ""}
+                            <SortList sortValuesProp={sortValues} sendSortValues={getSortValues} />
+                        </div>
                     </>
                     :
                     <details className={styles.filterDetails}>

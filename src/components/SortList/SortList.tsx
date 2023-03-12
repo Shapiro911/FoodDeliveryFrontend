@@ -9,7 +9,7 @@ export const SortList = ({ sortValuesProp, sendSortValues }: { sortValuesProp: S
     const [isOpenSort, setOpenSort] = useState<boolean>(true);
     const [isOpenPrice, setOpenPrice] = useState<boolean>(true);
     const [isOpenFee, setOpenFee] = useState<boolean>(true);
-    const [rangeValue, setRangeValue] = useState<string>("0");
+    const [rangeValue, setRangeValue] = useState<string>(sortValuesProp.fee)
 
     const handleSort = (key: keyof SortValues, value: any): void => {
         const sortValues = sortValuesProp;
