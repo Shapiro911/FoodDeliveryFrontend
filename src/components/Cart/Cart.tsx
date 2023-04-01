@@ -44,7 +44,7 @@ export const Cart = ({ closeCart, setCartTransition, cartTransition, trigger }: 
     useOnClickOutside(cartRef, handleCloseCart);
 
     return (
-        <div className={`${styles.cart} + ${cartTransition && styles.cartTransition}`} ref={cartRef as React.RefObject<HTMLDivElement>}>
+        <div className={`${styles.cart} ${cartTransition && styles.cartTransition}`} ref={cartRef as React.RefObject<HTMLDivElement>}>
             <FontAwesomeIcon icon={faXmark} className={styles.close} onClick={handleCloseCart} />
             {
                 product?.map((product) => {

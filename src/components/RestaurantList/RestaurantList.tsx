@@ -39,6 +39,10 @@ export const RestaurantList: React.FC<PropsWithChildren> = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps 
     }, [page, destination]);
 
+    useEffect(() => {
+        document.title = "Delivery App";
+    }, [])
+
     const fetchData = async (restaurantList: Restaurant[]) => {
         const newRestaurants: Restaurant[] = await dispatch(getRestaurants(destination, sortValues, page, pageMax, search));
         if (newRestaurants?.length !== pageMax) {
@@ -80,6 +84,7 @@ export const RestaurantList: React.FC<PropsWithChildren> = () => {
         }, 500);
 
         return () => clearTimeout(searchTimeout);
+        // eslint-disable-next-line react-hooks/exhaustive-deps 
     }, [search])
 
     return (

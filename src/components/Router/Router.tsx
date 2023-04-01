@@ -12,7 +12,8 @@ export const Router = () => {
             <div className="app">
                 <Routes>
                     {!address ?
-                        <Route path="/" element={<Home />} /> :
+                        <Route path="/" element={<Home />} />
+                        :
                         <Route path="/" element={<RestaurantList />} />}
                     <Route path='/restaurant'>
                         <Route index element={<ProductList />} />

@@ -8,29 +8,30 @@ import styles from "./ProductList.module.sass"
 import { getProducts } from "../../store/products/actionsCreators";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
-import { useLocation, useParams } from "react-router";
+import { useParams } from "react-router";
 import { ProductCategory } from "./ProductCategory/ProductCategory";
 import { ProductAside } from "../ProductAside/ProductAside";
 import { Restaurant } from "../../interfaces/restaurants.interface";
 import { useWindowDimensions } from "../../utils/hooks";
+import { getRestaurantById } from "../../store/restaurants/actionCreators";
 
 export const ProductList = () => {
     const [productList, setProductList] = useState<Category[]>([]);
     const dispatch: AppDispatch = useDispatch();
     const isLoading = useSelector(productListLoading);
-    const location = useLocation();
-    const { state } = location;
-    const [restaurant] = useState<Restaurant>(state.restaurant);
+    const [restaurant, setRestaurant] = useState<Restaurant>({ id: "", name: "", img: "", duration: "", rating: 0, fee: 0, price: 0 });
     const { height, width } = useWindowDimensions();
-    const { restaurantId } = useParams();
+    const { restaurantId } = useParams<string>();
 
     useEffect(() => {
-        document.title = restaurant.name;
         fetchData();
         // eslint-disable-next-line react-hooks/exhaustive-deps 
     }, [restaurantId])
 
     const fetchData = async () => {
+        const restaurant: Restaurant = await dispatch(getRestaurantById(restaurantId));
+        document.title = restaurant.name;
+        setRestaurant(restaurant);
         const productList: Category[] = await dispatch(getProducts(restaurantId));
         setProductList(productList);
     }
